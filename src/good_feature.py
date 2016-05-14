@@ -11,17 +11,27 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-#
+# 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from sklearn import tree
+import numpy as np
+import seaborn as sns
+import matplotlib.patches as mpatches
+from pylab import savefig
 
-# Classifier input
-features = [[140, 1], [130, 1], [150, 0], [170, 0]] # 0 = "bumpy", 1 = "smooth"
-# Classifier output
-labels = [0, 0, 1, 1] # 0 = "apple", 1 = "orange"
+# Greyhounds are usually taller than Labradors.
+# Eye color does not depend on the breed.
+greyhounds = 500
+labs = 500
 
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(features, labels)
-print(clf.predict([[150, 0]])) # predicts this is an orange.
+grey_height = 28 + 4 * np.random.randn(greyhounds)
+lab_height = 24 + 4 * np.random.randn(labs)
+
+# Visualize dog heights.
+sns.distplot(grey_height, color='red', label='Greyhound')
+sns.distplot(lab_height, color='blue', label='Labrador', axlabel='Dog Height')
+sns.plt.legend(handles=[mpatches.Patch(color='red', label='Greyhound'),
+                        mpatches.Patch(color='blue', label='Labrador')])
+savefig('../out/dog_height_hist.png')
+
