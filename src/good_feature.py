@@ -34,4 +34,3 @@ sns.distplot(lab_height, color='blue', label='Labrador', axlabel='Dog Height')
 sns.plt.legend(handles=[mpatches.Patch(color='red', label='Greyhound'),
                         mpatches.Patch(color='blue', label='Labrador')])
 savefig('../out/dog_height_hist.png')
-
